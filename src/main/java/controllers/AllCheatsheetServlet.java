@@ -1,23 +1,29 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import persistance.dao.CheatsheetDAO;
+import model.Cheatsheet;
+
 /**
- * Servlet implementation class TestServlet
+ * Servlet implementation class AllCheatsheetServlet
  */
-@WebServlet("/TestServlet")
-public class TestServlet extends HttpServlet {
+@WebServlet("/cheetsheets")
+public class AllCheatsheetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TestServlet() {
+    public AllCheatsheetServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +33,11 @@ public class TestServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		CheatsheetDAO cheatsheetDAO = new CheatsheetDAO();
+		List<Cheatsheet> cheatsheets = new ArrayList<>();
+		cheatsheets = cheatsheetDAO.getAllCheatsheets();
+		request.setAttribute("cheatsheets", cheatsheets);
+		request.getRequestDispatcher("allCheatsheets.jsp").forward(request, response);
 	}
 
 	/**

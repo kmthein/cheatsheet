@@ -1,5 +1,5 @@
 <form class="container mx-auto row g-3">
-	<h2 class="title">Create New Cheatsheet</h2>
+	<h2 class="center-title">Create New Cheatsheet</h2>
 	<div class="col-12">
 		<label for="inputAddress" class="form-label">Description</label> <input
 			type="text" class="form-control" id="inputAddress">
@@ -48,10 +48,10 @@
 			type="text" class="form-control" id="inputAddress">
 	</div>
 	<div class="col-12">
-		<div type="button"  data-bs-toggle="modal"
+		<div type="button" style="display: inline-block"  data-bs-toggle="modal"
 			data-bs-target="#exampleModal">
 			<i class="bi bi-plus-square-fill"></i> <label
-				class="form-check-label ml-2" for="gridCheck">Add New Block </label>
+				class="form-check-label ml-2" for="gridCheck" style="cursor: pointer">Add New Block </label>
 		</div>
 	</div>
 	<div class="col-12 d-flex justify-content-center my-4">

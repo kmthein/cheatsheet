@@ -3,6 +3,7 @@ package model;
 public class Cheatsheet extends Base  {
 	private String name, description, color, content, style, type;
 	private User user;
+	private String updatedAtFormatted;
 	public String getName() {
 		return name;
 	}
@@ -44,5 +45,11 @@ public class Cheatsheet extends Base  {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public String getUpdatedAtFormatted() {
+		return updatedAtFormatted;
+	}
+	public void setUpdatedAtFormatted(String updatedAtFormatted) {
+		this.updatedAtFormatted = updatedAtFormatted;
 	}
 }

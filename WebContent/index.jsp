@@ -1,5 +1,5 @@
 <jsp:include page="layout/head.jsp"></jsp:include>
-<jsp:include page="component/nav.jsp"></jsp:include>
+<jsp:include page="component/homeNav.jsp"></jsp:include>
 <jsp:include page="component/modal.jsp"></jsp:include>
 <!-- Main Content-->
 <div class="container px-4 px-lg-5">

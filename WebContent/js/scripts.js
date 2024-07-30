@@ -27,36 +27,3 @@ window.addEventListener('DOMContentLoaded', () => {
         scrollPos = currentTop;
     });
 })
-
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    const column2Input = document.getElementById('column2');
-    const additionalFields = document.getElementById('additionalFields');
-
-    column2Input.addEventListener('focusout', (event) => {
-        if (column2Input.value.trim() !== '') {
-            addNewInputFields();
-        }
-    });
-
-    function addNewInputFields() {
-        const newFieldSet = document.createElement('div');
-        newFieldSet.innerHTML = `
-            <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Column 1">
-            </div>
-            <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Column 2">
-            </div>
-        `;
-        additionalFields.appendChild(newFieldSet);
-
-        // Optional: Add an event listener to the new column2 input to continue adding new fields
-        const newColumn2Input = newFieldSet.querySelector('.col-md-6:nth-child(2) input');
-        newColumn2Input.addEventListener('input', (event) => {
-            if (newColumn2Input.value.trim() !== '') {
-                addNewInputFields();
-            }
-        });
-    }
-});

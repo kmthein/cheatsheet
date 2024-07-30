@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.User;
+import persistance.dao.UserDAO;
+
 /**
- * Servlet implementation class AllCheatsheetsServlet
+ * Servlet implementation class RegisterServlet
  */
-@WebServlet("/AllCheatsheetsServlet")
-public class AllCheatsheetsServlet extends HttpServlet {
+@WebServlet("/register")
+public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AllCheatsheetsServlet() {
+    public RegisterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,8 +37,15 @@ public class AllCheatsheetsServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String email = request.getParameter("email");
+		UserDAO userDAO = new UserDAO();
+		User userExist = userDAO.getUserByEmail(email);
+		if(userExist != null) {
+			request.setAttribute("error", "Email already taken");
+			request.setAttribute("user", userExist);
+			request.getRequestDispatcher("registerPage.jsp").forward(request, response);
+		}
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 }
