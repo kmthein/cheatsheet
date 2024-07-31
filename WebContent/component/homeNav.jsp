@@ -1,3 +1,5 @@
+<%@ page import="model.User"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
 	<div class="container">
 		<a class="navbar-brand" href="index.html">Cheatography</a>
@@ -13,15 +15,28 @@
 				<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
 					href="cheetsheets">Cheetsheet</a></li>
 				<%
-				String user = (String) session.getAttribute("user");
+				User user = (User) session.getAttribute("user");
 				if (user != null) {
 				%>
-				<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="createCheatsheet.jsp">Create</a></li>
+				<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
+					href="createCheatsheet.jsp">Create</a></li>
+				<div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+					<ul class="navbar-nav">
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"><%= user.getName() %> </a>
+							<ul class="dropdown-menu dropdown-menu-dark">
+								<li><a class="dropdown-item" href="logout">Logout</a></li>
+							</ul></li>
+					</ul>
+				</div>
 				<%
 				} else {
 				%>
-				<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="loginPage.jsp">Login</a></li>
-				<li class="nav-item"><a  class="nav-link px-lg-3 py-3 py-lg-4" href="registerPage.jsp">Register</a></li>
+				<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
+					href="loginPage.jsp">Login</a></li>
+				<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
+					href="registerPage.jsp">Register</a></li>
 				<%
 				}
 				%>

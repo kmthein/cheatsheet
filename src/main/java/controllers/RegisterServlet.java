@@ -75,8 +75,8 @@ public class RegisterServlet extends HttpServlet {
 		int result = userDAO.registerUser(user);
 		if (result > 0) {
 			response.getWriter().println("User registered successfully!");
-			HttpSession session = request.getSession();
-			session.setAttribute("user", user);
+//			HttpSession session = request.getSession();
+//			session.setAttribute("user", user);
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
 			request.setAttribute("user", enterUser);
