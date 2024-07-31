@@ -12,15 +12,19 @@
 					href="index.jsp">Home</a></li>
 				<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
 					href="cheetsheets">Cheetsheet</a></li>
-				<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
-					href="post.html">Login</a></li>
-				<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
-					href="registerPage.jsp">Register</a></li>
-				<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
-					href="createCheatsheet.jsp">Create</a></li>
-				<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-					data-bs-target="#exampleModal">Create</button> -->
-
+				<%
+				String user = (String) session.getAttribute("user");
+				if (user != null) {
+				%>
+				<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="createCheatsheet.jsp">Create</a></li>
+				<%
+				} else {
+				%>
+				<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="loginPage.jsp">Login</a></li>
+				<li class="nav-item"><a  class="nav-link px-lg-3 py-3 py-lg-4" href="registerPage.jsp">Register</a></li>
+				<%
+				}
+				%>
 			</ul>
 		</div>
 	</div>

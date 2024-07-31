@@ -2,6 +2,7 @@ package model;
 
 public class User extends Base {
 	private String email, password, name, website, description;
+	private Role role;
 
 	public String getEmail() {
 		return email;
@@ -41,5 +42,13 @@ public class User extends Base {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 }

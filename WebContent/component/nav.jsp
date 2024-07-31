@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light" id="mainNav" style="position: relative">
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav"
+	style="position: relative">
 	<div class="container">
 		<a class="navbar-brand" style="color: black" href="index.html">Cheatography</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -13,18 +14,22 @@
 				<li class="nav-item"><a style="color: black"
 					style="color: black" style="color: black" style="color: black"
 					class="nav-link px-lg-3 py-3 py-lg-4" href="cheetsheets">Cheatsheet</a></li>
+				<%
+				String user = (String) session.getAttribute("user");
+				if (user != null) {
+				%>
 				<li class="nav-item"><a style="color: black"
-					style="color: black" style="color: black" style="color: black"
-					class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Login</a></li>
-				<li class="nav-item"><a style="color: black"
-					style="color: black" style="color: black" style="color: black"
-					class="nav-link px-lg-3 py-3 py-lg-4" href="registerPage.jsp">Register</a></li>
-				<li class="nav-item"><a style="color: black"
-					style="color: black" style="color: black" style="color: black"
 					class="nav-link px-lg-3 py-3 py-lg-4" href="createCheatsheet.jsp">Create</a></li>
-				<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-					data-bs-target="#exampleModal">Create</button> -->
-
+				<%
+				} else {
+				%>
+				<li class="nav-item"><a style="color: black"
+					class="nav-link px-lg-3 py-3 py-lg-4" href="loginPage.jsp">Login</a></li>
+				<li class="nav-item"><a style="color: black"
+					class="nav-link px-lg-3 py-3 py-lg-4" href="registerPage.jsp">Register</a></li>
+				<%
+				}
+				%>
 			</ul>
 		</div>
 	</div>
