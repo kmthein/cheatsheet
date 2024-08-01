@@ -10,21 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Section;
-import model.Subsection;
 import persistance.dao.SectionDAO;
 import persistance.dao.SubsectionDAO;
 
 /**
- * Servlet implementation class AddSectionServlet
+ * Servlet implementation class AddSubsectionServlet
  */
-@WebServlet("/subsections")
-public class AllSubsectionServlet extends HttpServlet {
+@WebServlet("/add-subsection")
+public class AddSubsectionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AllSubsectionServlet() {
+	public AddSubsectionServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -35,11 +34,10 @@ public class AllSubsectionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		SubsectionDAO subsectionDAO = new SubsectionDAO();
-		List<Subsection> subsections = subsectionDAO.getAllSubsections();
-		request.setAttribute("subsections", subsections);
-		request.getRequestDispatcher("allSubsection.jsp").forward(request, response);
+		SectionDAO sectionDAO = new SectionDAO();
+		List<Section> sections = sectionDAO.getAllSections();
+		request.setAttribute("sections", sections);
+		request.getRequestDispatcher("addSubsection.jsp").forward(request, response);
 	}
 
 	/**
@@ -48,18 +46,13 @@ public class AllSubsectionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String name = request.getParameter("name");
-		SectionDAO sectionDAO = new SectionDAO();
-		Section sectionExist = sectionDAO.checkSectionExistByName(name);
-		if (sectionExist != null) {
-			request.setAttribute("error", "Section name already existed!");
-			request.getRequestDispatcher("addSection.jsp").forward(request, response);
-		} else {
-			int result = sectionDAO.addNewSection(name);
-			if (result == 1) {
-				response.sendRedirect("sections");
-			}
+		String type = request.getParameter("type");
+		int sectionId = Integer.parseInt(request.getParameter("section"));
+		SubsectionDAO subsectionDAO = new SubsectionDAO();
+		int result = subsectionDAO.addNewSubSection(name, type, sectionId);
+		if (result == 1) {
+			response.sendRedirect("subsections");
 		}
 	}
 

@@ -15,7 +15,7 @@
 					<!-- Page Heading -->
 					<div style="display: flex; justify-content: space-between; margin-bottom: 10px">
 						<h5 style="margin-bottom: 15px">All Subsections</h5>
-						<a href="addSection.jsp" style="background: #3158C9; color: #FFF; border: 0; font-size: 15px; padding: 5px 10px; border-radius: 5px;">Add Subsection</a>
+						<a href="add-subsection" style="background: #3158C9; color: #FFF; border: 0; font-size: 15px; padding: 5px 10px; border-radius: 5px;">Add Subsection</a>
 					</div>
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">

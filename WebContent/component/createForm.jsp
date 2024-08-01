@@ -41,6 +41,14 @@
 		</select>
 	</div>
 	<div class="col-12">
+		<label for="subsection" class="form-label">Layout</label> <select
+			id=""subsection" name="subsection" class="form-select">
+			<option value="2" selected>two columns</option>
+<!-- 			<option value="3">three columns</option>
+			<option value="4">four columns</option> -->
+		</select>
+	</div>
+	<div class="col-12">
 		<label for="inputAddress" class="form-label">Add Your Content</label> 
 	<div class="col-12">
 		<!-- <div type="button" style="display: inline-block"  data-bs-toggle="modal"
