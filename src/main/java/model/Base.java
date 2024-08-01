@@ -6,6 +6,7 @@ public class Base {
 	private int id;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
+	private String updatedAtFormatted;
 	public int getId() {
 		return id;
 	}
@@ -23,6 +24,12 @@ public class Base {
 	}
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+	public String getUpdatedAtFormatted() {
+		return updatedAtFormatted;
+	}
+	public void setUpdatedAtFormatted(String updatedAtFormatted) {
+		this.updatedAtFormatted = updatedAtFormatted;
 	}
 	
 }
