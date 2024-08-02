@@ -20,7 +20,7 @@
 				if (user != null) {
 				%>
 				<li class="nav-item"><a style="color: black"
-					class="nav-link px-lg-3 py-3 py-lg-4" href="createCheatsheet.jsp">Create</a></li>
+					class="nav-link px-lg-3 py-3 py-lg-4" href="add-cheatsheet">Create</a></li>
 				<div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
 					<ul class="navbar-nav">
 						<li class="nav-item dropdown"><a style="color: black"

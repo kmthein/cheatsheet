@@ -86,4 +86,10 @@ public class CheatsheetDAO {
 		}
 		return cheatsheet;
 	}
+	
+	public int addCheatSheet(Cheatsheet cheatsheet) {
+		int result = 0;
+		String query = "INSERT INTO ";
+		return result;
+	}
 }

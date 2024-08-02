@@ -13,13 +13,13 @@
 				<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
 					href="index.jsp">Home</a></li>
 				<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
-					href="cheetsheets">Cheetsheet</a></li>
+					href="cheetsheets">Cheatsheet</a></li>
 				<%
 				User user = (User) session.getAttribute("user");
 				if (user != null) {
 				%>
 				<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
-					href="createCheatsheet.jsp">Create</a></li>
+					href="add-cheatsheet">Create</a></li>
 				<div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
 					<ul class="navbar-nav">
 						<li class="nav-item dropdown"><a
