@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,39 +19,43 @@ import persistance.dao.UserDAO;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public LoginServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		UserDAO userDAO = new UserDAO();
 		User userExist = userDAO.getUserByEmail(email);
-		String storedHashPassword = userExist.getPassword();
-		if(userExist == null) {
+		if (userExist == null) {
 			request.setAttribute("error", "Email not existed!");
 			request.setAttribute("email", email);
 			request.getRequestDispatcher("loginPage.jsp").forward(request, response);
 		} else {
+			String storedHashPassword = userExist.getPassword();
 			Boolean passValid = BCrypt.checkpw(password, storedHashPassword);
-			if(!passValid) {
+			if (!passValid) {
 				request.setAttribute("error", "Email or password wrong!");
 				request.setAttribute("email", email);
 				request.getRequestDispatcher("loginPage.jsp").forward(request, response);
@@ -63,9 +68,10 @@ public class LoginServlet extends HttpServlet {
 			user.setPassword(password);
 			user.setDescription(userExist.getDescription());
 			user.setWebsite(userExist.getWebsite());
+			user.setRole(userExist.getRole());
 //			userExist.setPassword(password);
 			session.setAttribute("user", user);
-			response.sendRedirect("home");	
+			response.sendRedirect("home");
 		}
 	}
 

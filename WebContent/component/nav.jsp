@@ -28,6 +28,16 @@
 							data-bs-toggle="dropdown" aria-expanded="false"> <%=user.getName()%>
 						</a>
 							<ul class="dropdown-menu dropdown-menu-dark">
+								<%
+								if (user != null) {
+									if (user.getRole().name() == "ADMIN") {
+								%>
+									<li><a class="dropdown-item" href="admin">Go to Admin
+											Panel</a></li>
+								<%
+								}
+								}
+								%>
 								<li><a class="dropdown-item" href="logout">Logout</a></li>
 							</ul></li>
 					</ul>

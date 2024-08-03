@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import helper.DBHelper;
+import model.Role;
 import model.User;
 
 public class UserDAO {
@@ -52,6 +53,11 @@ public class UserDAO {
 				user.setName(set.getString("name"));
 				user.setWebsite(set.getString("website"));
 				user.setDescription(set.getString("description"));
+				String roleString = set.getString("role");
+				if (roleString != null) {
+					Role role = Role.valueOf(roleString.toUpperCase());
+					user.setRole(role);
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

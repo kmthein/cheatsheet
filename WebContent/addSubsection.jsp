@@ -12,7 +12,7 @@
 				<form action="add-subsection" method="post">
 					<label for="name" class="d-block mb-1">Subsection Name</label> 
 					<input
-						type="text" name="name" id="name"
+						type="text" name="name" id="name" required
 						style="border: 1px solid #bfbfbf; border-radius: 5px; width: 12%;"> 
 						<label
 						for="name" class="d-block mb-1">Type</label> 
@@ -23,7 +23,7 @@
 						<label for="section" class="form-label"
 							style="display: block; margin-bottom: 2px">Section</label> 
 							<select
-							id="section" name="section" class="form-select"
+							id="section" name="section" class="form-select" required
 							style="border: 1px solid #bfbfbf; border-radius: 5px; width: 12%;">
 							<option disabled selected value="">Select a section</option>
 							<c:forEach var="section" items="${sections}">
