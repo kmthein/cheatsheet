@@ -16,7 +16,7 @@ import model.Cheatsheet;
 /**
  * Servlet implementation class AllCheatsheetServlet
  */
-@WebServlet("/cheetsheets")
+@WebServlet("/cheatsheets")
 public class AllCheatsheetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

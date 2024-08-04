@@ -87,9 +87,27 @@ public class CheatsheetDAO {
 		return cheatsheet;
 	}
 	
-	public int addCheatSheet(Cheatsheet cheatsheet) {
+	public int addCheatSheet(String name, String description, String color, String language, String content, String style, String type, int userId, int sectionId, int subsectionId) {
 		int result = 0;
-		String query = "INSERT INTO ";
+		String query = "INSERT INTO cheatsheet(name, description, color, language, content, style, type, user_id, section_id, subsection_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		PreparedStatement stmt;
+		try {
+			stmt = con.prepareStatement(query);
+			stmt.setString(1, name);
+			stmt.setString(2, description);
+			stmt.setString(3, color);
+			stmt.setString(4, language);
+			stmt.setString(5, content);
+			stmt.setString(6, style);
+			stmt.setString(7, type);
+			stmt.setInt(8, userId);
+			stmt.setInt(9, sectionId);
+			stmt.setInt(10, subsectionId);
+			result = stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 }

@@ -8,8 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Section;
+import model.User;
+import persistance.dao.CheatsheetDAO;
 import persistance.dao.SectionDAO;
 
 /**
@@ -46,8 +49,20 @@ public class AddCheatsheetServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String name = request.getParameter("name");
 		String description = request.getParameter("description");
 		String title = request.getParameter("title");
+		String color = request.getParameter("color");
+		System.out.println(color);
+		String language = request.getParameter("language");
+		String style = request.getParameter("style");
+		String type = request.getParameter("type");
+		int section = Integer.parseInt(request.getParameter("section"));
+		int subsection = Integer.parseInt(request.getParameter("subsection"));
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		int userId = user.getId();
+		String layout = request.getParameter("layout");
 		StringBuilder contentBuilder = new StringBuilder();
 		contentBuilder.append("<table>");
 		contentBuilder.append("<tr><th>").append(title).append("</th></tr>");
@@ -72,8 +87,13 @@ public class AddCheatsheetServlet extends HttpServlet {
 		}
 		contentBuilder.append("</table>");
 		String content = contentBuilder.toString();
-		System.out.println(content);
-		doGet(request, response);
+		CheatsheetDAO cheatsheetDAO = new CheatsheetDAO();
+		int result = cheatsheetDAO.addCheatSheet(name, description, color, language, content, style, type, userId, section, subsection);
+		if(result == 1) {
+			request.getRequestDispatcher("cheatsheets").forward(request, response);
+		} else {
+			request.getRequestDispatcher("createCheatsheet.jsp").forward(request, response);
+		}
 	}
 
 }
