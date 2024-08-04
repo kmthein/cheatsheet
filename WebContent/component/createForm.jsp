@@ -3,21 +3,21 @@
 	function loadSections(sectionId) {
 		var xhr = new XMLHttpRequest();
 		xhr.open("GET", "getSubsections?sectionId=" + sectionId, true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var subsections = JSON.parse(xhr.responseText);
-                var subsectionSelect = document.getElementById("subsection");
-                subsectionSelect.innerHTML = "";
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var subsections = JSON.parse(xhr.responseText);
+				var subsectionSelect = document.getElementById("subsection");
+				subsectionSelect.innerHTML = "";
 
-                subsections.forEach(function(subsection) {
-                    var option = document.createElement("option");
-                    option.value = subsection.id;
-                    option.text = subsection.name;
-                    subsectionSelect.appendChild(option);
-                });
-            }
-        };
-        xhr.send();
+				subsections.forEach(function(subsection) {
+					var option = document.createElement("option");
+					option.value = subsection.id;
+					option.text = subsection.name;
+					subsectionSelect.appendChild(option);
+				});
+			}
+		};
+		xhr.send();
 	}
 </script>
 <form action="add-cheatsheet" method="post"
@@ -72,115 +72,134 @@
 		</select>
 	</div>
 	<div class="col-12">
-		<label for="subsection" class="form-label">Layout</label> <select
-			id="" subsection" name="subsection" class="form-select">
+		<label for="layout" class="form-label">Layout</label> <select
+			id="layout" name="layout" class="form-select">
 			<option value="2" selected>two columns</option>
-			<!-- 			<option value="3">three columns</option>
-			<option value="4">four columns</option> -->
 		</select>
 	</div>
 	<div class="col-12">
 		<div class="d-flex justify-content-between">
 			<label for="inputAddress" class="form-label">Content</label>
-			<div id="block-add" style="margin-top: 2px;">
-							<i class="bi bi-arrow-down-square"></i> <label
-								class="form-check-label ml-2" for="gridCheck"
-								style="cursor: pointer">Add New Block</label>
+			<div onclick="addNewBlock()"
+				style="margin-top: 2px; cursor: pointer;">
+				<i class="bi bi-arrow-down-square"></i> <label
+					class="form-check-label ml-2">Add New Block</label>
 			</div>
 		</div>
 		<div class="col-12">
-			<div class="row g-3" id="cheatsheetForm">
-				<div class="col-12 mb-2">
-					<label for="title1" class="form-label">Title</label> <input
-						type="text" id="title1" class="form-control" name="title1">
-				</div>
-				<div class="d-flex">
-					<div class="col-md-6">
-						<label for="column1" class="form-label" name="column1">Column
-							1</label>
+			<div id="block-container">
+				<!-- The initial block is hidden and used only as a template -->
+				<div class="row g-3 block d-none" id="template-block">
+					<div class="col-12 mb-2">
+						<label for="title1" class="form-label">Title</label> <input
+							type="text" id="title1" class="form-control" name="title1">
 					</div>
-					<div class="col-md-6">
-						<label for="column2" class="form-label" name="column2">Column
-							2</label>
-					</div>
-				</div>
-				<div id="input-container">
-					<div class="d-flex gap-2 mb-4">
+					<div class="d-flex">
 						<div class="col-md-6">
-							<input type="text" class="form-control" name="column1"
-								id="column1">
+							<label for="column1" class="form-label">Column 1</label>
 						</div>
 						<div class="col-md-6">
-							<input type="text" class="form-control" name="column2"
-								id="column2">
+							<label for="column2" class="form-label">Column 2</label>
+						</div>
+					</div>
+					<div class="input-container">
+						<div class="d-flex gap-2 mb-4">
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="b1column1"
+									id="column1">
+							</div>
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="b1column2"
+									id="column2">
+							</div>
+						</div>
+					</div>
+					<div class="d-flex justify-content-end">
+						<div class="row-add-btn" style="margin-top: 2px; cursor: pointer;">
+							<i class="bi bi-plus-circle"></i> <label
+								class="form-check-label ml-2">Add New Row</label>
 						</div>
 					</div>
 				</div>
-				<div class="d-flex justify-content-end">
-					<div id="row-add" style="margin-top: 2px;">
-						<i class="bi bi-plus-circle"></i> <label
-							class="form-check-label ml-2" for="gridCheck"
-							style="cursor: pointer">Add New Row</label>
-					</div>
-				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-12 d-flex justify-content-center my-4">
+		<button type="submit" class="btn btn-secondary">Submit</button>
+	</div>
 </form>
-</div>
-<div class="col-12 d-flex justify-content-center my-4">
-	<button type="submit" class="btn btn-secondary">Submit</button>
-</div>
-</form>
-<jsp:include page="modal.jsp"></jsp:include>
 <script>
-        const addRowBtn = document.getElementById('row-add');
-        addRowBtn.addEventListener('click', (event) => {
-            event.preventDefault();
-            addNewInputFields();
-        });
-        function addNewInputFields() {
-        	const container = document.getElementById("input-container");
-        	var inputCount = container.getElementsByTagName("input").length;
-            const newFieldSet = document.createElement('div');
-    		newFieldSet.className = 'd-flex gap-2 mb-4';
-    		const input1 = document.createElement("input");
-    		input1.type = "text";
-    		input1.name = "column" + (inputCount + 1);
-    		input1.className = "form-control";
-    		const input2 = document.createElement("input");
-    		input2.type = "text";
-    		input2.name = "column" + (inputCount + 2);
-    		input2.className = "form-control";
-    		const div1 = document.createElement("div");
-            div1.className = "col-md-6";
-            div1.appendChild(input1);
+let blockCount = 1;
 
-            const div2 = document.createElement("div");
-            div2.className = "col-md-6";
-            div2.appendChild(input2);
+function addNewBlock() {
+    const blockContainer = document.getElementById("block-container");
+    const templateBlock = document.getElementById("template-block");
 
-            newFieldSet.appendChild(div1);
-            newFieldSet.appendChild(div2);
+    // Clone the template block
+    const newBlock = templateBlock.cloneNode(true);
 
-            container.appendChild(newFieldSet);
-        }
-        
-        const form = document.getElementById('cheatsheetForm');
-        
-        const submitBtn = document.getElementById('submit-btn');
-        submitBtn.addEventListener('click', (event) => {
-        	event.preventDefault();
-        	console.log("Submit");
-        	const formData = new FormData(form);
-        	const data = {};
-            formData.forEach((value, key) => {
-                if (!data[key]) {
-                    data[key] = value;
-                } else {
-                    if (!Array.isArray(data[key])) {
-                        data[key] = [data[key]];
-                    }
-                    data[key].push(value);
-                }
-            });
-            console.log(data);
-        })
+    // Remove the 'd-none' class to make it visible
+    newBlock.classList.remove("d-none");
+
+    // Increment blockCount to ensure unique naming
+    blockCount++;
+    
+    // Update the IDs and names of the new block's elements
+    const titleInput = newBlock.querySelector('input[name="title1"]');
+    titleInput.name = `b${blockCount}title`;
+    titleInput.id = `title${blockCount}`;
+    
+    const inputContainer = newBlock.querySelector('.input-container');
+    inputContainer.querySelectorAll('input').forEach((input, index) => {
+        input.name = `b${blockCount}column${index + 1}`;
+    });
+
+    // Append the new block to the container
+    blockContainer.appendChild(newBlock);
+
+    // Add event listener for the "Add New Row" button within the new block
+    const rowAddBtn = newBlock.querySelector('.row-add-btn');
+    rowAddBtn.addEventListener('click', function(event) {
+        event.preventDefault();
+        addNewInputFields(inputContainer);
+    });
+}
+
+function addNewInputFields(container) {
+    const inputCount = container.getElementsByTagName("input").length;
+    const newFieldSet = document.createElement('div');
+    newFieldSet.className = 'd-flex gap-2 mb-4';
+
+    const input1 = document.createElement("input");
+    input1.type = "text";
+    input1.name = `b${blockCount}column${inputCount + 1}`;
+    input1.className = "form-control";
+
+    const input2 = document.createElement("input");
+    input2.type = "text";
+    input2.name = `b${blockCount}column${inputCount + 2}`;
+    input2.className = "form-control";
+
+    const div1 = document.createElement("div");
+    div1.className = "col-md-6";
+    div1.appendChild(input1);
+
+    const div2 = document.createElement("div");
+    div2.className = "col-md-6";
+    div2.appendChild(input2);
+
+    newFieldSet.appendChild(div1);
+    newFieldSet.appendChild(div2);
+
+    container.appendChild(newFieldSet);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initial "Add New Row" button in the template block
+    const initialInputContainer = document.querySelector('#template-block .input-container');
+    document.querySelector('#template-block .row-add-btn').addEventListener('click', function(event) {
+        event.preventDefault();
+        addNewInputFields(initialInputContainer);
+    });
+});
 </script>
