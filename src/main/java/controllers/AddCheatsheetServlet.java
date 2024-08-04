@@ -53,7 +53,6 @@ public class AddCheatsheetServlet extends HttpServlet {
 		String description = request.getParameter("description");
 		String title = request.getParameter("title");
 		String color = request.getParameter("color");
-		System.out.println(color);
 		String language = request.getParameter("language");
 		String style = request.getParameter("style");
 		String type = request.getParameter("type");
@@ -65,7 +64,7 @@ public class AddCheatsheetServlet extends HttpServlet {
 		String layout = request.getParameter("layout");
 		StringBuilder contentBuilder = new StringBuilder();
 		contentBuilder.append("<table>");
-		contentBuilder.append("<tr><th>").append(title).append("</th></tr>");
+		contentBuilder.append("<tr><th>").append(title).append("</th><th></th></tr>");
 		int columnNumber = 1;
 		boolean isNewRow = true;
 		while (request.getParameter("column" + columnNumber) != null) {
@@ -88,8 +87,9 @@ public class AddCheatsheetServlet extends HttpServlet {
 		contentBuilder.append("</table>");
 		String content = contentBuilder.toString();
 		CheatsheetDAO cheatsheetDAO = new CheatsheetDAO();
-		int result = cheatsheetDAO.addCheatSheet(name, description, color, language, content, style, type, userId, section, subsection);
-		if(result == 1) {
+		int result = cheatsheetDAO.addCheatSheet(name, description, color, language, content, style, type, userId,
+				section, subsection);
+		if (result == 1) {
 			request.getRequestDispatcher("cheatsheets").forward(request, response);
 		} else {
 			request.getRequestDispatcher("createCheatsheet.jsp").forward(request, response);

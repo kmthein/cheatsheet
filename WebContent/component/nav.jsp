@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-lg navbar-light" id="mainNav"
 	style="position: relative">
 	<div class="container">
-		<a class="navbar-brand" style="color: black" href="index.html">Cheatography</a>
+		<a class="navbar-brand" style="color: black" href="index.jsp">Cheatography</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
 			aria-expanded="false" aria-label="Toggle navigation">

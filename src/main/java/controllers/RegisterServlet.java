@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import jbcrypt.BCrypt;
 import model.Role;
@@ -64,23 +63,24 @@ public class RegisterServlet extends HttpServlet {
 			request.setAttribute("error", "Email already taken");
 			request.setAttribute("user", enterUser);
 			request.getRequestDispatcher("registerPage.jsp").forward(request, response);
-		}
-		User user = new User();
-		user.setEmail(email);
-		user.setPassword(hashedPassword);
-		user.setName(name);
-		user.setWebsite(website);
-		user.setDescription(description);
-		user.setRole(Role.USER);
-		int result = userDAO.registerUser(user);
-		if (result > 0) {
-			response.getWriter().println("User registered successfully!");
-//			HttpSession session = request.getSession();
-//			session.setAttribute("user", user);
-			request.getRequestDispatcher("index.jsp").forward(request, response);
-		} else {
-			request.setAttribute("user", enterUser);
-			request.getRequestDispatcher("registerPage.jsp").forward(request, response);
+		} else if (userExist == null) {
+			User user = new User();
+			user.setEmail(email);
+			user.setPassword(hashedPassword);
+			user.setName(name);
+			user.setWebsite(website);
+			user.setDescription(description);
+			user.setRole(Role.USER);
+			int result = userDAO.registerUser(user);
+			if (result > 0) {
+				response.getWriter().println("User registered successfully!");
+				// HttpSession session = request.getSession();
+				// session.setAttribute("user", user);
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			} else {
+				request.setAttribute("user", enterUser);
+				request.getRequestDispatcher("registerPage.jsp").forward(request, response);
+			}
 		}
 	}
 
