@@ -65,6 +65,25 @@ public class SubsectionDAO {
 		return result;
 	}
 	
+	public Subsection getSubsectionById(int id) {
+		Subsection subsection = null;
+		String query = "SELECT * FROM subsection WHERE id = ?";
+		try {
+			PreparedStatement stmt = con.prepareStatement(query);
+			stmt.setInt(1, id);
+			ResultSet set = stmt.executeQuery();
+			while(set.next()) {
+				subsection = new Subsection();
+				subsection.setId(set.getInt("id"));
+				subsection.setName(set.getString("name"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return subsection;
+	}
+	
 	public List<Subsection> getSubsectionBySectionId(int sectionId) {
 		List<Subsection> subsections = new ArrayList<>();
 		String query = "SELECT * FROM subsection WHERE section_id = ?";

@@ -1,8 +1,10 @@
 package model;
 
 public class Cheatsheet extends Base  {
-	private String name, description, color, content, style, type;
+	private String name, description, color, content, style, type, language;
 	private User user;
+	private Section section;
+	private Subsection subsection;
 	public String getName() {
 		return name;
 	}
@@ -39,10 +41,28 @@ public class Cheatsheet extends Base  {
 	public void setType(String type) {
 		this.type = type;
 	}
+	public String getLanguage() {
+		return language;
+	}
+	public void setLanguage(String language) {
+		this.language = language;
+	}
 	public User getUser() {
 		return user;
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public Section getSection() {
+		return section;
+	}
+	public void setSection(Section section) {
+		this.section = section;
+	}
+	public Subsection getSubsection() {
+		return subsection;
+	}
+	public void setSubsection(Subsection subsection) {
+		this.subsection = subsection;
 	}
 }

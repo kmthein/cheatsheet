@@ -12,6 +12,8 @@ import java.util.List;
 
 import helper.DBHelper;
 import model.Cheatsheet;
+import model.Section;
+import model.Subsection;
 import model.User;
 
 public class CheatsheetDAO {
@@ -71,6 +73,15 @@ public class CheatsheetDAO {
 				cheatsheet.setContent(set.getString("content"));
 				cheatsheet.setStyle(set.getString("style"));
 				cheatsheet.setType(set.getString("type"));
+				cheatsheet.setLanguage(set.getString("language"));
+				SectionDAO sectionDAO = new SectionDAO();
+				SubsectionDAO subsectionDAO = new SubsectionDAO();
+				Section section = sectionDAO.getSectionById(set.getInt("section_id"));
+				Subsection subsection = subsectionDAO.getSubsectionById(set.getInt("subsection_id"));
+				if(section != null && subsection != null) {
+					cheatsheet.setSection(section);
+					cheatsheet.setSubsection(subsection);
+				}
 				UserDAO userDAO = new UserDAO();
 				User user = userDAO.getUserById(set.getInt("user_id"));
 				if (user != null) {
@@ -103,6 +114,31 @@ public class CheatsheetDAO {
 			stmt.setInt(8, userId);
 			stmt.setInt(9, sectionId);
 			stmt.setInt(10, subsectionId);
+			result = stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public int updateCheatSheet(String name, String description, String color, String language, String content, String style, String type, int userId, int sectionId, int subsectionId, int cheatsheetId) {
+		int result = 0;
+		String query = "UPDATE cheatsheet SET name = ?, description = ?, color = ?, language = ?, content = ?, style = ?, type = ?, user_id = ?, section_id = ?, subsection_id = ? WHERE id = ?";
+		PreparedStatement stmt;
+		try {
+			stmt = con.prepareStatement(query);
+			stmt.setString(1, name);
+			stmt.setString(2, description);
+			stmt.setString(3, color);
+			stmt.setString(4, language);
+			stmt.setString(5, content);
+			stmt.setString(6, style);
+			stmt.setString(7, type);
+			stmt.setInt(8, userId);
+			stmt.setInt(9, sectionId);
+			stmt.setInt(10, subsectionId);
+			stmt.setInt(11, cheatsheetId);
 			result = stmt.executeUpdate();
 			
 		} catch (SQLException e) {
